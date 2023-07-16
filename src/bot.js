@@ -10,7 +10,7 @@ const start = async () => {
   try {
     await bot.setMyCommands(menuCommands)
   } catch (e) {
-    console.log('starting bot error: ', e)
+    console.log('Bot starting error: ', e)
   }
 
   // Message listener
