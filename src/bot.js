@@ -17,9 +17,10 @@ const start = async () => {
   bot.on('message', async message => {
     const chatId = String(message.chat.id)
     const text = message.text
+    const lastMessage = message.message_id
 
     try {
-      await menu(bot, chatId, text)
+      await menu(bot, chatId, text, lastMessage)
     } catch (e) {
       console.log('Message listener error: ', e)
     }
