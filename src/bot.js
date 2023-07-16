@@ -1,24 +1,27 @@
-import TelegramApi from 'node-telegram-bot-api'
-import dotenv from 'dotenv'
+const TelegramApi = require('node-telegram-bot-api')
+const dotenv = require('dotenv')
 dotenv.config()
+
+const { menu, menuCommands } = require('./menu')
 
 const bot = new TelegramApi(process.env.TOKEN, { polling: true })
 
 const start = async () => {
   try {
-    // todo
+    await bot.setMyCommands(menuCommands)
   } catch (e) {
-    console.log('START ERROR: ', e)
+    console.log('starting bot error: ', e)
   }
 
   // Message listener
   bot.on('message', async message => {
+    const chatId = String(message.chat.id)
     const text = message.text
 
     try {
-      console.log(text)
+      await menu(bot, chatId, text)
     } catch (e) {
-      console.log('message listener error: ', e)
+      console.log('Message listener error: ', e)
     }
   })
 
@@ -29,7 +32,7 @@ const start = async () => {
     try {
       console.log(btnData)
     } catch (e) {
-      console.log('button listener error: ', e)
+      console.log('Button listener error: ', e)
     }
   })
 }
