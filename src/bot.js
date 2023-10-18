@@ -1,8 +1,9 @@
-const TelegramApi = require('node-telegram-bot-api')
-const dotenv = require('dotenv')
+import TelegramApi from 'node-telegram-bot-api'
+import dotenv from 'dotenv'
 dotenv.config()
 
-const { menu, menuCommands } = require('./menu')
+import { menu } from './menu/menu.js'
+import { menuCommands } from './menu/menu-commands.js'
 
 const bot = new TelegramApi(process.env.TOKEN, { polling: true })
 
